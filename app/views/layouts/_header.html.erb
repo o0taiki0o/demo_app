@@ -1,0 +1,72 @@
+<header class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<%= link_to "Go Shopping", shopping_path, id: "logo" %>
+			<nav>
+				<ul class="nav pull-right">
+					<li>
+						<%= link_to "Home", root_path %>
+					</li>
+					<%if signed_in? && current_user.user_type == 0%>
+					<li>
+						<%= link_to "View Orders", orders_path%>
+					</li>
+					<%end%>
+					<li>
+						<%= link_to "Help", '#' %>
+					</li>
+					<% if signed_in? %>
+					<li>
+						<%= link_to "Users", '#' %>
+					</li>
+					<li>
+						<%if !session[:cart].nil? %><a href="http://localhost:3000/cart"><%= session[:cart].count%> items in cart</a>
+						<%else%>
+						<a>Nothing in cart</a>
+						<%end%>
+					</li>
+					<li id="fat-menu" class="dropdown">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b> </a>
+						<ul class="dropdown-menu">
+							<li>
+								<%= link_to "Profile", current_user %>
+							</li>
+							<li>
+								<%= link_to "Settings", '#' %>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<%= link_to "Sign out", signout_path, method: "delete" %>
+							</li>
+						</ul>
+					</li>
+					<% else %>
+					<li>
+						<a data-toggle="modal" href="#myModal">Sign in</a>
+					</li>
+					<% end %>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+
+<div class="fade modal hide" id="myModal">
+	<h1>Sign in</h1>
+	<div style="margin:10px;">
+		<div>
+			<%= form_for(:session, url: sessions_path) do |f| %>
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+			<%= f.hidden_field(:return_to,value:params[:return_to]) %>
+			<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+			<% end %>
+			<p>
+				New user? <%= link_to "Sign up now!", signup_path %>
+			</p>
+		</div>
+	</div>
+</div>

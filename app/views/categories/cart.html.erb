@@ -1,0 +1,25 @@
+<%if !@products.nil?%>
+<table class="table">
+	<tr>
+		<th>Product Name</th>
+		<th>Quantities</th>
+		<th>Price per unit</th>
+		<th>Sum</th>
+	</tr>
+	<%@products.each do |product|%>
+	<tr>
+		<td> <%= product.name%> </td>
+		<td><%=session[:cart][product.id.to_s]%></td>
+		<td><%= product.price%></td>
+		<td><%= product.price*session[:cart][product.id.to_s]%></td>
+	</tr>
+	<%@sum+=product.price*session[:cart][product.id.to_s]%>
+	<%end%>
+</table>
+Total : <%=@sum%><br/>
+<a class="btn btn-primary" href="<%=shopping_path%>"><i class="icon-arrow-left"></i> Continue Shopping</a>
+<a class="btn btn-primary" href="<%=saveOrder_path%>"><i class="icon-shopping-cart"></i> Check Out</a>
+<%else%>
+Nothing add to cart yet
+<%= link_to "Continue Shopping",shopping_path,class: "btn btn-small btn-primary"%>
+<%end%>

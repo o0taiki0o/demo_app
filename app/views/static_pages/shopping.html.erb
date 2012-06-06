@@ -1,0 +1,31 @@
+<% provide(:title,"Shopping")%> <h1>Shopping</h1>
+<div class="navigation">
+	<ul class="nav nav-pills nav-stacked">
+		<% CategoriesController.categories.each do |category| %>
+		<li>
+			<%= link_to category.name, category %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<div class="main_content">
+	<h2>Product List</h2>
+	<table class ="table">
+		<tr>
+			<th>Product Name</th>
+			<th>Product Price</th>
+			<th>Quantities</th>
+			<th>Option</th>
+		</tr>
+		<%@products.each do |product|%>
+		<tr>
+			<td><%= product.name%></td>
+			<td><%= product.price%></td>
+			<td><%= product.quantity%></td> 
+			<td> <a class="btn btn-secondary" href="http://localhost:3000/buy/<%=product.id%>"><i class="icon-shopping-cart icon-large"></i> Buy Now</a>
+			<a class="btn btn-secondary" href="http://localhost:3000/add_to_cart/<%=product.id%>"><i class="icon-plus icon-large"></i> Add to cart </a></td>
+		</tr>
+		<%end%>
+	</table>
+</div>
+<div style="clear:both"></div>

@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<h1>Do you want to buy this product</h1>
+<table border="1" style="width:100%">
+	<tr>
+		<td>Product Name</td>
+		<td>Product Price</td>
+		<td>Quantities</td>
+		<td>Option</td>
+	</tr>
+	<tr>
+		<td><%=@product.name%></td>
+		<td><%=@product.price%></td>
+		<td><%=@product.quantity%></td>
+		<td><%=link_to "Confirm","http://localhost:3000/makeOrder/"+@product.id.to_s%> <%=link_to "Cancel",shopping_path%></td>
+	</tr>
+</table>
+

@@ -1,0 +1,32 @@
+<div class="navigation">
+	<ul class="nav nav-pills nav-stacked">
+		<% CategoriesController.categories.each do |category| %>
+		<li><%= link_to category.name, category %></li>
+		<% end %>
+	</ul>
+</div>
+<div class="main_content">
+<%if !@products.empty?%>
+<h2>Product List for <%=@category.name%></h2>
+<table class="table">
+	<tr>
+		<th>Product Name</th>
+		<th>Product Price</th>
+		<th>Quantities</th>
+		<th>Option</th>
+	</tr>
+	<%@products.each do |product|%>
+	<tr>
+		<td><%= product.name%></td>
+		<td><%= product.price%></td>
+		<td><%= product.quantity%></Dtd>
+		<td> <%= link_to "Buy now","http://localhost:3000/buy/"+product.id.to_s%>
+		<%= link_to 'Add to cart', "http://localhost:3000/add_to_cart/"+product.id.to_s%> </td>
+	</tr>
+	<%end%>
+</table>
+<%else%>>
+<h1>No products</h1>
+<%end%>
+</div>
+<div style="clear:both"></div>

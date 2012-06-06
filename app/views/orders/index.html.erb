@@ -1,0 +1,42 @@
+<h1>Listing orders</h1>
+
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>Buyer</th>
+		<th>Product Name</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Created at</th>
+	</tr>
+
+	<% a = 0%>
+	<% @orders.each do |order| %>
+	<tr>
+		<td><%= order.id %></td>
+		<td><%= @user[a].name%></td>
+		<%if !order.detail.nil?%>
+		<td> <%order.detail.each do |detail|%>
+		<%= detail.name%>
+		<br>
+		<%end%></td>
+		<td> <%order.detail.each do |detail|%>
+		<%= detail.quantity%>
+		<br>
+		<%end%></td>
+		<td> <%order.detail.each do |detail|%>
+		<%= detail.quantity*detail.price%>
+		<br>
+		<%end%></td>
+		<%else%>
+		<td>N/A</td>
+		<td>N/A</td>
+		<td>N/A</td>
+		<%end%>
+		<td><%= order.created_at %></td>
+	</tr>
+	<% a=a+1%>
+	<% end %>
+</table>
+
+<br />

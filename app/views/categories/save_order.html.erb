@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<h1>This is your order detail</h1>
+<table class="table">
+	<tr>
+		<td>Buyer</td>
+		<td>Product Name</td>
+		<td>Product Price</td>
+		<td>Quantities</td>
+		<td>Created at</td>
+	</tr>
+	<tr>
+		<td><%=@current_user.name%></td>
+		<td><%@products.each do |product|%>
+		<%=product.name%><br>
+		<%end%></td>
+		<td><%@products.each do |product|%>
+		<%=product.price%><br>
+		<%end%></td>
+		<td><%@products.each do |product|%>
+		<%=product.quantity%>
+		<%end%>
+		</td>
+		<td><%=@order.created_at%></td>
+	</tr>
+</table>
+	<h2><%=link_to "Continue Shopping", shopping_path%></h2>
